@@ -11,10 +11,10 @@ namespace BIF4_MLE_UEB4.src
         public double[] DesiredValues;
         public HiddenLayer ParentLayer;
 
-        public OutputLayer(double[] desiredValues)
+        public OutputLayer(int desiredValuesLength)
         {
-            DesiredValues = desiredValues;
-            NeuronValues = new double[desiredValues.Length];
+            NeuronValues = new double[desiredValuesLength];
+            Errors = new double[NeuronValues.Length];
         }
 
         public override void AdjustWeights()
@@ -40,7 +40,7 @@ namespace BIF4_MLE_UEB4.src
 
                 for (int i = 0; i < ParentLayer.Length; i++)
                 {
-                    x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i][j];
+                    x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i,j];
                 }
 
                 x += ParentLayer.biasValues[j] * ParentLayer.biasWeights[j];

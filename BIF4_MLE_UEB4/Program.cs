@@ -25,10 +25,10 @@ namespace BIF4_MLE_UEB4
                 9
             };
 
-            NeuralNetwork network = new NeuralNetwork(784, desiredValues, 0.2, 0.0, false, false);
-
-            network.Train();
-
+            NeuralNetwork network = new NeuralNetwork(784, desiredValues, 0.05, 0.5, true, false);
+            network.Train(0.01);
+            network.Test();
+            Console.ReadKey();
         }
     }
 }
