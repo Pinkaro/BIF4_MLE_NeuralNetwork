@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIF4_MLE_UEB4.NeuralNetwork
+namespace BIF4_MLE_UEB4.src
 {
-    public class InputLayer : ALayer
+    public class HiddenLayer : ALayer
     {
+        public OutputLayer ChildLayer;
+        public InputLayer ParentLayer;
+
         internal double[][] weights;
         internal double[][] weightChanges;
         internal double[] biasWeights;
         internal double[] biasValues;
 
-        public HiddenLayer ChildLayer;
-
-        public InputLayer(int neuronAmount)
+        public HiddenLayer(int hiddenNeuronsAmount)
         {
-            NeuronValues = new double[neuronAmount];
+            NeuronValues = new double[hiddenNeuronsAmount];
         }
 
         public override void AdjustWeights()
@@ -51,12 +52,45 @@ namespace BIF4_MLE_UEB4.NeuralNetwork
 
         public override void CalculateErrors()
         {
-            throw new InvalidOperationException("This operation is not allowed on InputLayer.");
+            double sum = 0.0;
+
+            for (int i = 0; i < Length; i++)
+            {
+                sum = 0.0;
+
+                for (int j = 0; j < ChildLayer.Length; j++)
+                {
+                    sum += ChildLayer.Errors[j] * weights[i][j];
+                }
+
+                Errors[i] = sum * NeuronValues[i] * (1.0 - NeuronValues[i]);
+            }
         }
 
         public override void CalculateNeuronValues()
         {
-            throw new InvalidOperationException("This operation is not allowed on InputLayer.");
+            double x = 0.0;
+
+            for (int j = 0; j < Length; j++)
+            {
+                x = 0.0;
+
+                for (int i = 0; i < ParentLayer.Length; i++)
+                {
+                    x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i][j];
+                }
+
+                x += ParentLayer.biasValues[j] * ParentLayer.biasWeights[j];
+
+                if (NeuralNetwork.LinearOutput)
+                {
+                    NeuronValues[j] = x;
+                }
+                else
+                {
+                    NeuronValues[j] = 1.0 / (1.0 + Math.Exp(-x));
+                }
+            }
         }
     }
 }

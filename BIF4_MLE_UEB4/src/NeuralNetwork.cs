@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIF4_MLE_UEB4.NeuralNetwork
+namespace BIF4_MLE_UEB4.src
 {
     public class NeuralNetwork
     {
@@ -78,7 +78,9 @@ namespace BIF4_MLE_UEB4.NeuralNetwork
             {
                 foreach(Image image in MnistReader.ReadTrainingData())
                 {
-                    //_inputLayer.NeuronValues = image.Data;
+                    _inputLayer.SetNeurons(image.Data);
+                    Console.WriteLine(_inputLayer.NeuronValues.Length);
+                    
                 }
             }
         }

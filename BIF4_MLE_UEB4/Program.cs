@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BIF4_MLE_UEB4.src;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,24 @@ namespace BIF4_MLE_UEB4
     {
         static void Main(string[] args)
         {
+            double[] desiredValues = new double[10]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            };
+
+            NeuralNetwork network = new NeuralNetwork(784, desiredValues, 0.2, 0.0, false, false);
+
+            network.Train();
+
         }
     }
 }

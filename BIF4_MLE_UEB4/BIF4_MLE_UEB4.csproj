@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\deploy\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,11 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NeuralNetwork\HiddenLayer.cs" />
-    <Compile Include="NeuralNetwork\ALayer.cs" />
-    <Compile Include="NeuralNetwork\InputLayer.cs" />
-    <Compile Include="NeuralNetwork\NeuralNetwork.cs" />
-    <Compile Include="NeuralNetwork\OutputLayer.cs" />
+    <Compile Include="src\HiddenLayer.cs" />
+    <Compile Include="src\ALayer.cs" />
+    <Compile Include="src\InputLayer.cs" />
+    <Compile Include="src\NeuralNetwork.cs" />
+    <Compile Include="src\OutputLayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\Extensions.cs" />

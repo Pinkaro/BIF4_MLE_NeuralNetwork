@@ -4,21 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIF4_MLE_UEB4.NeuralNetwork
+namespace BIF4_MLE_UEB4.src
 {
-    public class HiddenLayer : ALayer
+    public class InputLayer : ALayer
     {
-        public OutputLayer ChildLayer;
-        public InputLayer ParentLayer;
-
         internal double[][] weights;
         internal double[][] weightChanges;
         internal double[] biasWeights;
         internal double[] biasValues;
 
-        public HiddenLayer(int hiddenNeuronsAmount)
+        public HiddenLayer ChildLayer;
+
+        public InputLayer(int neuronAmount)
         {
-            NeuronValues = new double[hiddenNeuronsAmount];
+            NeuronValues = new double[neuronAmount];
+        }
+
+        public void SetNeurons(double[,] input)
+        {
+            this.NeuronValues = new double[input.Length];
+
+            for(int i = 0; i < input.GetLength(0); i++)
+            {
+                for(int j = 0; j < input.GetLength(1); j++)
+                {
+                    this.NeuronValues[j] = input[i, j];
+                }
+            }
         }
 
         public override void AdjustWeights()
@@ -52,45 +64,12 @@ namespace BIF4_MLE_UEB4.NeuralNetwork
 
         public override void CalculateErrors()
         {
-            double sum = 0.0;
-
-            for (int i = 0; i < Length; i++)
-            {
-                sum = 0.0;
-
-                for (int j = 0; j < ChildLayer.Length; j++)
-                {
-                    sum += ChildLayer.Errors[j] * weights[i][j];
-                }
-
-                Errors[i] = sum * NeuronValues[i] * (1.0 - NeuronValues[i]);
-            }
+            throw new InvalidOperationException("This operation is not allowed on InputLayer.");
         }
 
         public override void CalculateNeuronValues()
         {
-            double x = 0.0;
-
-            for (int j = 0; j < Length; j++)
-            {
-                x = 0.0;
-
-                for (int i = 0; i < ParentLayer.Length; i++)
-                {
-                    x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i][j];
-                }
-
-                x += ParentLayer.biasValues[j] * ParentLayer.biasWeights[j];
-
-                if (NeuralNetwork.LinearOutput)
-                {
-                    NeuronValues[j] = x;
-                }
-                else
-                {
-                    NeuronValues[j] = 1.0 / (1.0 + Math.Exp(-x));
-                }
-            }
+            throw new InvalidOperationException("This operation is not allowed on InputLayer.");
         }
     }
 }

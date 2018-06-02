@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIF4_MLE_UEB4.NeuralNetwork
+namespace BIF4_MLE_UEB4.src
 {
     public class OutputLayer : ALayer
     {

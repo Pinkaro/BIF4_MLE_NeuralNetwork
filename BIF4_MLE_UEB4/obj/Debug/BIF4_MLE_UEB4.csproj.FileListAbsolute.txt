@@ -1,0 +1,10 @@
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\obj\Debug\BIF4_MLE_UEB4.csprojAssemblyReference.cache
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\obj\Debug\BIF4_MLE_UEB4.csproj.CoreCompileInputs.cache
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\bin\Debug\BIF4_MLE_UEB4.exe.config
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\bin\Debug\BIF4_MLE_UEB4.exe
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\bin\Debug\BIF4_MLE_UEB4.pdb
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\obj\Debug\BIF4_MLE_UEB4.exe
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\BIF4_MLE_UEB4\obj\Debug\BIF4_MLE_UEB4.pdb
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\deploy\BIF4_MLE_UEB4.exe.config
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\deploy\BIF4_MLE_UEB4.exe
+C:\Users\schal\source\repos\BIF4_MLE_UEB4\deploy\BIF4_MLE_UEB4.pdb
