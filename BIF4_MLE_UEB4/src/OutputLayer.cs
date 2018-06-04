@@ -40,7 +40,7 @@ namespace BIF4_MLE_UEB4.src
 
                 for (int i = 0; i < ParentLayer.Length; i++)
                 {
-                    x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i,j];
+                    x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i, j];
                 }
 
                 x += ParentLayer.biasValues[j] * ParentLayer.biasWeights[j];
@@ -54,7 +54,23 @@ namespace BIF4_MLE_UEB4.src
                     NeuronValues[j] = 1.0 / (1.0 + Math.Exp(-x));
                 }
             }
+        }
 
+        public int GetIndexOfHighestNeuron()
+        {
+            int highestNeuronIndex = 0;
+            double highestNeuron = 0.0;
+
+            for (int i = 0; i < NeuronValues.Length; i++)
+            {
+                if (NeuronValues[i] > highestNeuron)
+                {
+                    highestNeuron = NeuronValues[i];
+                    highestNeuronIndex = i;
+                }
+            }
+
+            return highestNeuronIndex;
         }
     }
 }

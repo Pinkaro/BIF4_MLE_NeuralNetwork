@@ -19,6 +19,7 @@ namespace BIF4_MLE_UEB4.src
         {
             NeuronValues = new double[neuronAmount];
             InitializeWeights(NeuronValues.Length);
+            Errors = new double[neuronAmount];
         }
 
         private void InitializeWeights(int length)
@@ -30,8 +31,9 @@ namespace BIF4_MLE_UEB4.src
                 weights = new double[length, length];
                 RandomizeWeight(rand, null, weights);
 
+                // those are the changes of the previous iteration, no need to randomize
                 weightChanges = new double[length, length];
-                RandomizeWeight(rand, null, weightChanges);
+                //RandomizeWeight(rand, null, weightChanges);
 
                 biasWeights = new double[length];
                 RandomizeWeight(rand, biasWeights, null);
@@ -92,7 +94,19 @@ namespace BIF4_MLE_UEB4.src
             {
                 for(int j = 0; j < input.GetLength(1); j++)
                 {
-                    this.NeuronValues[j] = input[i, j];
+                    // ENSURE BLACK AND WHITE
+                    double value = input[i, j];
+
+                    if (value > 0.0)
+                    {
+                        value = 1.0;
+                    }
+                    else
+                    {
+                        value = 0.0;
+                    }
+
+                    this.NeuronValues[i*28+j] = value;
                 }
             }
         }
@@ -128,7 +142,10 @@ namespace BIF4_MLE_UEB4.src
 
         public override void CalculateErrors()
         {
-            throw new InvalidOperationException("This operation is not allowed on InputLayer.");
+            for (int i = 0; i < Length; i++)
+            {
+                Errors[i] = 0.0;
+            }
         }
 
         public override void CalculateNeuronValues()

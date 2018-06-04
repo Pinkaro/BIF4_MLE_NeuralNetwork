@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,6 @@ namespace BIF4_MLE_NeuronalNetwork.utils
         private const string TrainLabels = "mnist/train-labels.idx1-ubyte";
         private const string TestImages = "mnist/t10k-images.idx3-ubyte";
         private const string TestLabels = "mnist/t10k-labels.idx1-ubyte";
-
-        private static Object myLock = new Object();
 
         public static int NumberOfImages;
 
@@ -41,35 +40,35 @@ namespace BIF4_MLE_NeuronalNetwork.utils
 
         private static IEnumerable<Image> Read(string imagesPath, string labelsPath)
         {
-            lock (myLock)
+
+            Console.WriteLine("Reading ... ");
+            BinaryReader labels = new BinaryReader(new FileStream(labelsPath, FileMode.Open));
+            BinaryReader images = new BinaryReader(new FileStream(imagesPath, FileMode.Open));
+
+            int magicImages = images.ReadBigInt32();
+            int numberOfImages = images.ReadBigInt32();
+            //NumberOfImages = numberOfImages;
+            int width = images.ReadBigInt32();
+            int height = images.ReadBigInt32();
+
+            int magicLabel = labels.ReadBigInt32();
+            int numberOfLabels = labels.ReadBigInt32();
+
+            for (int i = 0; i < numberOfImages; i++)
             {
-                Console.WriteLine("Reading ... ");
-                BinaryReader labels = new BinaryReader(new FileStream(labelsPath, FileMode.Open));
-                BinaryReader images = new BinaryReader(new FileStream(imagesPath, FileMode.Open));
+                var bytes = images.ReadBytes(width * height);
+                var arr = new double[height, width];
 
-                int magicImages = images.ReadBigInt32();
-                int numberOfImages = images.ReadBigInt32();
-                NumberOfImages = numberOfImages;
-                int width = images.ReadBigInt32();
-                int height = images.ReadBigInt32();
+                arr.ForEach((j, k) => arr[j, k] = bytes[j * height + k]);
 
-                int magicLabel = labels.ReadBigInt32();
-                int numberOfLabels = labels.ReadBigInt32();
-
-                for (int i = 0; i < numberOfImages; i++)
+                yield return new Image()
                 {
-                    var bytes = images.ReadBytes(width * height);
-                    var arr = new double[height, width];
-
-                    arr.ForEach((j, k) => arr[j, k] = bytes[j * height + k]);
-
-                    yield return new Image()
-                    {
-                        Data = arr,
-                        Label = labels.ReadByte()
-                    };
-                }
+                    Data = arr,
+                    Label = labels.ReadByte()
+                };
             }
+            labels.Close();
+            images.Close();
         }
     }
 }

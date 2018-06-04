@@ -33,7 +33,7 @@ namespace BIF4_MLE_UEB4.src
                 RandomizeWeight(rand, null, weights);
 
                 weightChanges = new double[length, length];
-                RandomizeWeight(rand, null, weightChanges);
+                //RandomizeWeight(rand, null, weightChanges);
 
                 biasWeights = new double[length];
                 RandomizeWeight(rand, biasWeights, null);
@@ -140,7 +140,7 @@ namespace BIF4_MLE_UEB4.src
             {
                 x = 0.0;
 
-                for (int i = 0; i < ParentLayer.Length; i++)
+                for (int i = 0; i < ParentLayer.Length -1; i++)
                 {
                     x += ParentLayer.NeuronValues[i] * ParentLayer.weights[i,j];
                 }
